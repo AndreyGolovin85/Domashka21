@@ -70,7 +70,7 @@ class Shop(Store):
             super().add(name, count)
 
 class Request:
-    def __init__(self, storages, request_str):
+    def __init__(self, request_str):
         request_list = request_str.split
         action = request_list[0]
         self.__count = request_list[1]
