@@ -71,7 +71,7 @@ class Shop(Store):
 
 class Request:
     def __init__(self, request_str):
-        request_list = request_str.split
+        request_list = request_str.split()
         action = request_list[0]
         self.__count = request_list[1]
         self.__item = request_list[2]
@@ -93,3 +93,7 @@ class Request:
             eval(self.__to).add(self.__item, self.__count)
         elif self.__from:
             eval(self.__from).remove(self.__item, self.__count)
+
+
+storage_1 = Store(items={"Телефон": 10, "Компьютер": 10, "Фен": 10})
+shop_1 = Shop(items={"Телефон": 1, "Компьютер": 1, "Фен": 1})
