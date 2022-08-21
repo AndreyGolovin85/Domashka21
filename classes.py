@@ -30,19 +30,19 @@ class Store(Storage):
 
     def add(self, name, count):
         if name in self.__items.keys():
-            if self.get_free_space() >= count:
-                self.__items[name] += count
+            if self.get_free_space() >= int(count):
+                self.__items[name] += int(count)
                 return True
             return False
         else:
-            if self.get_free_space() >= count:
-                self.__items[name] = count
+            if self.get_free_space() >= int(count):
+                self.__items[name] = int(count)
                 return True
             return False
 
     def remove(self, name, count):
-        if self.__items[name] >= count:
-            self.__items[name] -= count
+        if self.__items[name] >= int(count):
+            self.__items[name] -= int(count)
             return True
         return False
 
@@ -74,7 +74,7 @@ class Request:
         request_list = request_str.split()
         action = request_list[0]
         self.__count = request_list[1]
-        self.__item = request_list[2]
+        self.__items = request_list[2]
         if action == "Доставить":
             self.__from = request_list[4]
             self.__to = request_list[6]
@@ -87,12 +87,12 @@ class Request:
 
     def move(self):
         if self.__to and self.__from:
-            if eval(self.__to).add(self.__item, self.__count):
-                eval(self.__from).remove(self.__item, self.__count)
+            if eval(self.__to).add(self.__items, self.__count):
+                eval(self.__from).remove(self.__items, self.__count)
         elif self.__to:
-            eval(self.__to).add(self.__item, self.__count)
+            eval(self.__to).add(self.__items, self.__count)
         elif self.__from:
-            eval(self.__from).remove(self.__item, self.__count)
+            eval(self.__from).remove(self.__items, self.__count)
 
 
 storage_1 = Store(items={"Телефон": 10, "Компьютер": 10, "Фен": 10})
